@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+*
+{
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color:skyblue;
+  }
+
+  li {
+    float: left;
+  }
+
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 22px;
+  }
+
+  li a:hover:not(.active) {
+    background-color: black;
+  }
+
+  .active {
+    background-color: #4CAF50;
+  }
+
+ .container
+ {
+     background-color: mintcream;
+ }
+
+
+  .container h1
+  {
+      letter-spacing: 2px;
+  }
+
+  .footer1
+{
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+}
+.footer11,.footer12,.footer13,.footer14
+{
+  padding-top: 10px;
+  margin-left: 80px;
+  height: 80px;
+  width: 18%;
+  border: 2px solid black;
+  font-size: 32px;
+  text-align: center;
+  letter-spacing: 2px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+.sub-container
+{
+    height: 800px;
+    width: 80%;
+    margin-left: 130px;
+    margin-top: 70px;
+    border: 1px solid black;
+}
+
+.arrangement
+{
+  font-size: 22px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-align: center;
+  letter-spacing: 1.5px;
+}
+.button
+{
+  font-size: 28px;
+  background-color:lightblue;
+  color: white;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 10px 20px 10px 20px;
+  cursor: pointer;
+}
+.button:hover
+{
+  background-color:white;
+  color: lightblue;
+  border-radius: 10px;
+}
+input{
+  font-weight: bolder;
+  cursor: pointer;
+}
+.piechart
+{
+  font-size: 32px;
+}
+a{
+  text-decoration: none;
+}
+
+.footerA
+{
+  height: auto;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+}
+.footera,.footerb
+{
+  height: auto;
+  width: 45%;
+  margin-right: 100px;
+  margin-left: 100px;
+  font-size: 32px;
+
+}
+</style>
+      <script type = "text/JavaScript">
+            function AutoRefresh( t ) {
+               setTimeout("location.reload(true);", t);
+            }
+      </script>
+</head>
+<body onload = "JavaScript:AutoRefresh(150000);">
+
+<ul>
+  <li><a href="#home">Home</a></li>
+  <li><a href="#Data">Data</a></li>
+  <li><a href="#Customer">Customer Services</a></li>
+  <li style="float:right"><a class="active" href="#about">About Company</a></li>
+</ul>
+<div class="container">
+    <br><br><h1><b>Dashboard</b></h1><br>
+    <div>
+        {{msg}}
+    </div>
+    <div class="footer1">
+        <div class="footer11" style="background-color:deepskyblue;"><a href="#sub-container">Power Graph</a></div>
+        <div class="footer12" style="background-color:mediumslateblue;"><a href="#sub-container2">Array Arrangement</a></div>
+        <div class="footer13" style="background-color: mediumspringgreen;"><a href="#sub-container2">Maintanence</a></div>
+        <div class="footer14" style="background-color: orange;"><a href="#sub-container3">Traffic Density</a></div>
+    </div>
+        
+    </div>
+
+
+
+    <div class="sub-container" id="sub-container">
+        <ul>
+            <li><a href="#Scale">Power Consumption</a></li>
+            <li style="float:right"><a href="#previous">Previous</a></li style="float:right">
+            <li style="float:right"><a href="#present">Present</a></li style="float:right">
+          </ul>
+
+           <canvas id="pie-chart" width="600" height="400"></canvas>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.js"></script>
+<script>
+    new Chart(document.getElementById("pie-chart"), {
+         type: 'pie',
+          data: {
+            labels: {{labels | tojson}},
+            datasets: [{
+              label: "Pie Chart",
+              backgroundColor: {{colors | tojson}},
+            data: {{power | tojson}}
+            }]
+          },
+          options: {
+            title: {
+              display: true,
+              text: 'Pie Chart Title'
+            }
+          }
+        });
+</script>
+            
+    </div>
+
+
+    <div class="sub-container" id="sub-container2">
+      <ul>
+          <li><a href="#Scale">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Array Arrangement</a></li>
+          <li style="float:right"><a href="#previous">Maintanance</a></li style="float:right">
+        </ul>
+          <div class="footerA">
+              <div class="footera"><a href="#sub-container"><p><br><br>
+                {%for i in range(0,5)%}
+                    {{i+1}}:{{res[i]}}
+                    <br/>
+                    {%endfor%}
+            </p></a>
+            <div>
+              Current Arrangement<br/>
+              {%if(arrange1=="even")%}
+              BH-6 : Even Arrangement
+              {%else%}
+              BH-6 : Regular Arrangement
+              {%endif%}
+          </div>
+          <div>
+              {%if(arrange2=="even")%}
+              BH-3 : Even Arrangement
+              {%else%}
+              BH-3 : Regular Arrangement
+              {%endif%}
+          </div></div>
+              <div class="footerb"><form title="areaname" method="post"><br>
+                <br>
+                  <input type="radio" name="area" value="BH-6">&nbsp;BH-6 Street &nbsp;&nbsp;&nbsp;&nbsp;
+<!--                  <input type="radio" name="arrange" value="regular" checked>&nbsp;All Array On<br>-->
+                   <input type="radio" name="area" value="BH-3">&nbsp;BH-3 ground&nbsp;&nbsp;&nbsp;&nbsp;
+<!--                   <input type="radio" name="arrange" value="even">&nbsp;Even Array On<br>-->
+                  <div>
+<!--          <br>Change the array arrangement<br><br>-->
+<!--                 </div>-->
+<!--                  <input type="radio" name="area1" value="BH-6" checked>&nbsp;BH-6 Street &nbsp;&nbsp;&nbsp;&nbsp;-->
+<!--                  <input type="radio" name="arrange1" value="regular" checked>&nbsp;All Array On<br>-->
+<!--                   <input type="radio" name="area1" value="BH-3">&nbsp;BH-3 ground &nbsp;&nbsp;&nbsp;&nbsp;-->
+<!--                   <input type="radio" name="arrange1" value="even">&nbsp;Even Array On<br>-->
+                  <input type="submit" value="Submit" class="button">
+              </form></div>
+          </div>
+
+    </div>
+
+<div>
+    <!--<form  title="redirectchange" method="post">
+<input value="redirect" type="submit" name="redirect">
+    </form>-->
+    <a href={{url_for('changearray')}}>Change Arrangement</a>
+</div>
+    
+    
+
+    <div class="sub-container" id="sub-container3">
+      <ul>
+          <li><a href="#Scale">Traffic Density</a></li>
+          <li style="float:right"><a href="#previous">Previous</a></li style="float:right">
+          <li style="float:right"><a href="#present">Present</a></li style="float:right">
+        </ul>
+        <div>
+            {{den}}<br/>
+            {{bright}}
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
