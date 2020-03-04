@@ -4,7 +4,7 @@ from datetime import datetime,timedelta
 import pyrebase
 
 
-config = {
+config ={
  "apiKey": "AIzaSyCIXDU8UNMYEMDbPljFF6M4RtX6JOBY6Qs",
     "authDomain": "streetlightmanagement-675be.firebaseapp.com",
     "databaseURL": "https://streetlightmanagement-675be.firebaseio.com",
@@ -13,7 +13,7 @@ config = {
     "messagingSenderId": "761700878889",
     "appId": "1:761700878889:web:1fdb6764dcb35956142a38",
     "measurementId": "G-9TMR495E17"
-}
+} #apikey
 
 firebase = pyrebase.initialize_app(config)
 
